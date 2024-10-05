@@ -1,4 +1,4 @@
-### 개발 환경 
+## 개발 환경 
 
 1. 프로젝트 환경설정(vite를 활용한 React 프로젝트) : `npm install vite@latest` <br />
 2. React 중앙집중식 상태관리 라이브러리 Recoil : `npm install recoil` <br />
@@ -8,7 +8,7 @@
 6. TypeScript에서 Node.js 모듈을 사용할 수 있는 환경 구축: `npm i @types/node` <br />
 7. React Toast popup 모듈 : `npm install react-simple-toasts` <br />
 
-### 🔨 git convention 
+## 🔨 git convention 
 
 - **feat**: 새로운 기능 추가 및 개선
 - **style**: 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
