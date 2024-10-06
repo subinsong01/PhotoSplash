@@ -1,4 +1,4 @@
-## 개발 환경 
+## ✏️ 개발 환경 
 
 1. 프로젝트 환경설정(vite를 활용한 React 프로젝트) : `npm install vite@latest` <br />
 2. React 중앙집중식 상태관리 라이브러리 Recoil : `npm install recoil` <br />
