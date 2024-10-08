@@ -1,46 +1,21 @@
+import styles from './styles/index.module.scss'
+import { useState } from 'react'
+import { imageData } from '../../recoil/selectors/imageSelector'
+import { useRecoilValue } from 'recoil'
+import { CardDTO } from './types/card'
 import CommonFooter from '../../components/common/footer/CommonFooter'
 import CommonHeader from '../../components/common/header/CommonHeader'
 import CommonNav from '../../components/common/navigation/CommonNav'
 import CommonSearchBox from '../../components/common/searchBar/CommonSearchBox'
 import Card from './components/Card'
-import axios from 'axios'
-import styles from './styles/index.module.scss'
-import { useEffect, useState } from 'react'
-import { CardDTO } from './types/card'
 
 function index() {
-  const [imgUrls, setImgUrls] = useState([])
+  const imgSelector = useRecoilValue(imageData)
+  const [imgData, setImgData] = useState<CardDTO[]>([])
 
-  const getDate = async() => {
-    //API 호출
-    const API_URL = `https://api.unsplash.com/search/photos`
-    const API_KEY = `AIPBYZTCOSBpdPUe4p-KdRqWnrQq8xmtDO4m7E97IkQ`
-    const PER_PAGE = 30
-
-    const searchValue = 'Korea'
-    const pageValue = 100
-    try{
-      const res = 
-        await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`)
-        console.log(res)
-
-        if(res.status == 200){ //통신이 완료 되었다는 의미
-          setImgUrls(res.data.results)
-        }
-    }catch(error){
-      console.log(error)
-    }
-  }
-
-  const cardList = imgUrls.map((card:CardDTO) => {
-    return (
-      <Card data ={card} key={card.id}/> 
-    )
+  const CARD_LIST = imgSelector.data.results.map((card:CardDTO) => {
+    return <Card data ={card} key={card.id}/> 
   })
-
-  useEffect(() => {
-    getDate()
-  }, [])
 
   return (
     <div className={styles.page}>
@@ -61,7 +36,7 @@ function index() {
           </div>
         </div>
         <div className={styles.page__contents__imageBox}>
-          {cardList }
+          {CARD_LIST }
         </div>
       </div>
       {/*공통 푸터 UI 부분 */}
