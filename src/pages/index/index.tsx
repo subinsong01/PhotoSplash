@@ -8,13 +8,15 @@ import CommonHeader from '../../components/common/header/CommonHeader'
 import CommonNav from '../../components/common/navigation/CommonNav'
 import CommonSearchBox from '../../components/common/searchBar/CommonSearchBox'
 import Card from './components/Card'
+import DetailDialog from '../../components/common/dialog/DetailDialog'
 
 function index() {
   const imgSelector = useRecoilValue(imageData)
-  const [imgData, setImgData] = useState<CardDTO[]>([])
+  const [imgData, setImgData] = useState<CardDTO>()
+  const [open, setOpen] = useState<boolean>(false) //이미지 상세 다이얼로그 발생 관리 State
 
   const CARD_LIST = imgSelector.data.results.map((card:CardDTO) => {
-    return <Card data ={card} key={card.id}/> 
+    return <Card data ={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData}/> 
   })
 
   return (
@@ -41,6 +43,7 @@ function index() {
       </div>
       {/*공통 푸터 UI 부분 */}
       <CommonFooter />
+      {open && <DetailDialog data={imgData}/>}
   </div>
   )
 }
